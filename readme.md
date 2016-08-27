@@ -50,7 +50,7 @@ Assumptions
 Tasks
 =====
 
-    []  Produce CSV data that, when processed, demonstrates the required functionality
+    [x] Produce CSV data that, when processed, demonstrates the required functionality
 
         To demonstrate REQ-04:
 
