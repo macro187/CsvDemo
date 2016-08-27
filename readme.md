@@ -38,7 +38,8 @@ Assumptions
 ===========
 
 -   No more than one person at the same address
--   CSV fields are in a known order, no header required
+-   CSV fields are in a known order
+-   CSV header present
 -   No invalid/unexpected/missing CSV data
 -   No CSV data that differs by case only
 -   No CSV data containing comma, quote, or newline characters
