@@ -38,8 +38,8 @@ Assumptions
 ===========
 
 -   No more than one person at the same address
--   CSV fields are in a known order
 -   CSV header present
+-   CSV fields are in a known order
 -   No invalid/unexpected/missing CSV data
 -   No CSV data that differs by case only
 -   No CSV data containing comma, quote, or newline characters
@@ -51,7 +51,7 @@ Assumptions
 Tasks
 =====
 
-    [x] Produce CSV data that, when processed, demonstrates the required functionality
+    [x] Produce a test CSV file containing data that, if processed, could demonstrate all required functionality
 
         To demonstrate REQ-04:
 
@@ -71,20 +71,15 @@ Tasks
         -   Records consisting of a variety of street names, to demonstrate sorting
 
 
-    []  C# class library implementing required functionality in terms of lines/chars/strings
+    []  Produce a hand-written REQ-04 output file correct for the example CSV
 
 
-    []  C# unit test project for class library
-
-        Hard-coded test CSV data as per above
-
-        Hard-coded correct REQ-04 output to check against
-
-        Hard-coded correct REQ-05 output to check against
-
-        Test method that pipes test CVS data to library and checks for correct output text data
+    []  Produce a hand-written REQ-05 output file correct for the example CSV
 
 
-    []  Thin C# console program wrapper that pipes CSV data from an input file to the library, and then pipes output
-        from the library to two text files
+    []  C# console program that reads and parses all lines from the test CSV file, maintains necessary counts/tallies as
+        it goes, and then produces the required report files
 
+
+    []  C# unit test project that invokes the above console program and verifies the resulting report files against
+        the hand-written solutions
