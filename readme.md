@@ -110,7 +110,7 @@ Tasks
 
 
     [x] C# unit test project that invokes the above console program and verifies the resulting
-        report files against the hand-written solutions REQ-06
+        report files against the hand-written solutions
 
         Delivers:
         REQ-06
