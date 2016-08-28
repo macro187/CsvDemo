@@ -37,7 +37,6 @@ REQ-06  Includes a unit test project
 Assumptions
 ===========
 
--   No more than one person at the same address
 -   REQ-05 after StreetName, sort by additional fields to break ties and ensure order stability:
     StreetNumber,City,State,PostCode
 -   CSV header present
