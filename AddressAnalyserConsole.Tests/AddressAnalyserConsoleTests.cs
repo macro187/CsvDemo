@@ -60,13 +60,13 @@ namespace CsvDemo.AddressAnalyserConsole.Tests
         /// <remarks>
         /// This wouldn't work if tests were somehow run in parallel across multiple processes
         /// </remarks>
-        static object ExeLock = new object();
+        static object exeLock = new object();
 
 
         [TestMethod]
         public void Program_Produces_Exit_Code_0()
         {
-            lock (ExeLock)
+            lock (exeLock)
             {
                 using (var proc = Process.Start(exePath))
                 {
@@ -80,7 +80,7 @@ namespace CsvDemo.AddressAnalyserConsole.Tests
         [TestMethod]
         public void Program_Produces_Correct_Frequency_Report()
         {
-            lock (ExeLock)
+            lock (exeLock)
             {
                 using (var proc = Process.Start(exePath))
                 {
@@ -96,7 +96,7 @@ namespace CsvDemo.AddressAnalyserConsole.Tests
         [TestMethod]
         public void Program_Produces_Correct_Address_Report()
         {
-            lock (ExeLock)
+            lock (exeLock)
             {
                 using (var proc = Process.Start(exePath))
                 {
