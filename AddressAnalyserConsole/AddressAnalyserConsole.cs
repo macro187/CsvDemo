@@ -43,6 +43,7 @@ namespace CsvDemo.AddressAnalyserConsole
             //
             // Route trace/debug output to stderr
             //
+            Trace.Listeners.Clear();
             Trace.Listeners.Add(new ConsoleTraceListener(true));
 
             //
