@@ -37,7 +37,7 @@ REQ-06  Includes a unit test project
 Assumptions
 ===========
 
--   REQ-05 after StreetName, sort by additional fields to break ties and ensure order stability:
+-   REQ-05 after StreetName, also sort by additional fields to break ties and ensure order stability:
     StreetNumber,City,State,PostCode
 -   CSV header present
 -   CSV fields are in a known order
@@ -70,17 +70,28 @@ Tasks
         -   State field
         -   Postcode field
         -   Records consisting of a variety of street names, to demonstrate sorting
+        -   Records consisting of duplicate addresses, to demonstrate deduplication
 
 
-    []  Produce a hand-written REQ-04 output file correct for the example CSV
+    [x] Produce a hand-written REQ-04 output file correct for the example CSV
 
 
-    []  Produce a hand-written REQ-05 output file correct for the example CSV
+    [x] Produce a hand-written REQ-05 output file correct for the example CSV
 
 
-    []  C# console program that reads and parses all lines from the test CSV file, maintains necessary counts/tallies as
+    [x] C# console program that reads and parses all lines from the test CSV file, maintains necessary counts/tallies as
         it goes, and then produces the required report files
+        
+        Delivers:
+        REQ-01
+        REQ-02
+        REQ-03
+        REQ-04
+        REQ-05
 
 
-    []  C# unit test project that invokes the above console program and verifies the resulting report files against
-        the hand-written solutions
+    [x] C# unit test project that invokes the above console program and verifies the resulting report files against
+        the hand-written solutions REQ-06
+
+        Delivers:
+        REQ-06
