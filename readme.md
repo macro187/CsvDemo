@@ -38,6 +38,8 @@ Assumptions
 ===========
 
 -   No more than one person at the same address
+-   REQ-05 after StreetName, sort by additional fields to break ties and ensure order stability:
+    StreetNumber,City,State,PostCode
 -   CSV header present
 -   CSV fields are in a known order
 -   No invalid/unexpected/missing CSV data
