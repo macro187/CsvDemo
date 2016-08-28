@@ -28,6 +28,24 @@ namespace CsvDemo.AddressAnalyserConsole.Tests
 
 
         /// <summary>
+        /// Full path to the hand-written known-correct address report file
+        /// </summary>
+        static readonly string testAddressReportPath =
+            Path.Combine(
+                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                "test-address-report.txt");
+
+
+        /// <summary>
+        /// Full path to the address report file output by the .exe
+        /// </summary>
+        static readonly string addressReportPath =
+            Path.Combine(
+                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                "address-report.txt");
+
+
+        /// <summary>
         /// Full path to the .exe
         /// </summary>
         static readonly string exePath =
@@ -70,6 +88,22 @@ namespace CsvDemo.AddressAnalyserConsole.Tests
                     Assert.AreEqual(
                         File.ReadAllText(testFrequencyReportPath).Trim(),
                         File.ReadAllText(frequencyReportPath).Trim());
+                }
+            }
+        }
+
+
+        [TestMethod]
+        public void Program_Produces_Correct_Address_Report()
+        {
+            lock (ExeLock)
+            {
+                using (var proc = Process.Start(exePath))
+                {
+                    proc.WaitForExit();
+                    Assert.AreEqual(
+                        File.ReadAllText(testAddressReportPath).Trim(),
+                        File.ReadAllText(addressReportPath).Trim());
                 }
             }
         }

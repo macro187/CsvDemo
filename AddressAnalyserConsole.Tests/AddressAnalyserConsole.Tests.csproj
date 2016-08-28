@@ -61,6 +61,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\test-address-report.txt">
+      <Link>test-address-report.txt</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\test-frequency-report.txt">
       <Link>test-frequency-report.txt</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
