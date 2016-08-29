@@ -1,11 +1,11 @@
 ﻿using CsvHelper;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using CsvDemo.Analysers;
 
 namespace CsvDemo.Console
 {
@@ -68,23 +68,14 @@ namespace CsvDemo.Console
         static void Main2()
         {
             //
-            // Process records from CSV file, maintaining cumulative information required for
-            // reports
+            // Analyse records from CSV file using a PeopleAnalyser
             //
-            var nameTallies = new Dictionary<string, int>();
-            var uniqueAddresses = new HashSet<string>();
+            var analyser = new PeopleAnalyser();
             using (var textReader = File.OpenText(csvPath))
             {
-                foreach (var p in new CsvReader(textReader).GetRecords<Person>())
+                foreach (var person in new CsvReader(textReader).GetRecords<Person>())
                 {
-                    // Track names and their frequencies
-                    if (!nameTallies.ContainsKey(p.FirstName)) nameTallies.Add(p.FirstName, 0);
-                    nameTallies[p.FirstName]++;
-                    if (!nameTallies.ContainsKey(p.LastName)) nameTallies.Add(p.LastName, 0);
-                    nameTallies[p.LastName]++;
-
-                    // Track unique addresses
-                    uniqueAddresses.Add(p.Address);
+                    analyser.Process(person);
                 }
             }
 
@@ -92,13 +83,13 @@ namespace CsvDemo.Console
             // Compute summary information for reports
             //
             var sortedNameFrequencies =
-                nameTallies
+                analyser.NameTallies
                     .Select(kvp => new { Name = kvp.Key, Frequency = kvp.Value })
                     .OrderByDescending(tally => tally.Frequency)
                     .ThenBy(tally => tally.Name);
 
             var sortedAddresses =
-                uniqueAddresses
+                analyser.UniqueAddresses
                     .Select(address => address.Split(new char[] { ' ' }, 2))
                     .Select(a => new {
                         Number = int.Parse(a[0], CultureInfo.InvariantCulture),
