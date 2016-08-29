@@ -73,7 +73,7 @@ namespace CsvDemo.AddressAnalyserConsole
             //
             // Build an enumerable of records
             //
-            var records =
+            var people =
                 // ...that lazily reads lines from the CSV file
                 File.ReadLines(csvPath)
                     // ...skipping the header
@@ -82,58 +82,47 @@ namespace CsvDemo.AddressAnalyserConsole
                     .Select(line => line.Split(','))
                     // ...and packs them up as record objects based on a known field order
                     .Select(fields =>
-                        new {
+                        new Person() {
                             FirstName = fields[0],
                             LastName = fields[1],
-                            Address = new Address(
-                                int.Parse(fields[2], CultureInfo.InvariantCulture),
-                                fields[3],
-                                fields[4],
-                                fields[5],
-                                fields[6])});
+                            Address = fields[2],
+                            PhoneNumber = fields[3]});
 
             //
             // Process records, maintaining cumulative information required for reports
             //
-            var firstNameTallies = new Dictionary<string, int>();
-            var lastNameTallies = new Dictionary<string, int>();
-            var uniqueAddresses = new HashSet<Address>();
-            foreach (var r in records)
+            var nameTallies = new Dictionary<string, int>();
+            var uniqueAddresses = new HashSet<string>();
+            foreach (var p in people)
             {
-                // ...first names and their frequencies
-                if (!firstNameTallies.ContainsKey(r.FirstName)) firstNameTallies.Add(r.FirstName, 0);
-                firstNameTallies[r.FirstName]++;
-
-                // ...last names and their frequencies
-                if (!lastNameTallies.ContainsKey(r.LastName)) lastNameTallies.Add(r.LastName, 0);
-                lastNameTallies[r.LastName]++;
+                // ...names and their frequencies
+                if (!nameTallies.ContainsKey(p.FirstName)) nameTallies.Add(p.FirstName, 0);
+                nameTallies[p.FirstName]++;
+                if (!nameTallies.ContainsKey(p.LastName)) nameTallies.Add(p.LastName, 0);
+                nameTallies[p.LastName]++;
 
                 // ...unique addresses
-                uniqueAddresses.Add(r.Address);
+                uniqueAddresses.Add(p.Address);
             }
 
             //
             // Compute summary information for reports
             //
-            var sortedFirstNameFrequencies =
-                firstNameTallies
-                    .Select(kvp => new { FirstName = kvp.Key, Frequency = kvp.Value })
+            var sortedNameFrequencies =
+                nameTallies
+                    .Select(kvp => new { Name = kvp.Key, Frequency = kvp.Value })
                     .OrderByDescending(tally => tally.Frequency)
-                    .ThenBy(tally => tally.FirstName);
-
-            var sortedLastNameFrequencies =
-                lastNameTallies
-                    .Select(kvp => new { LastName = kvp.Key, Frequency = kvp.Value })
-                    .OrderByDescending(tally => tally.Frequency)
-                    .ThenBy(tally => tally.LastName);
+                    .ThenBy(tally => tally.Name);
 
             var sortedAddresses =
                 uniqueAddresses
-                    .OrderBy(a => a.StreetName)
-                    .ThenBy(a => a.StreetNumber)
-                    .ThenBy(a => a.City)
-                    .ThenBy(a => a.State)
-                    .ThenBy(a => a.Postcode);
+                    .Select(address => address.Split(new char[] { ' ' }, 2))
+                    .Select(a => new {
+                        Number = int.Parse(a[0], CultureInfo.InvariantCulture),
+                        Street = a[1] })
+                    .OrderBy(a => a.Street)
+                    .ThenBy(a => a.Number)
+                    .Select(a => a.Number.ToString(CultureInfo.InvariantCulture) + " " + a.Street);
 
             //
             // Produce frequency report
@@ -141,18 +130,11 @@ namespace CsvDemo.AddressAnalyserConsole
             File.WriteAllLines(
                 frequencyReportPath,
                 new string[] {}
-                    .Concat(new[] { "FirstName,Frequency" })
-                    .Concat(sortedFirstNameFrequencies.Select(t =>
+                    .Concat(new[] { "Name,Frequency" })
+                    .Concat(sortedNameFrequencies.Select(t =>
                         string.Join(
                             ",",
-                            t.FirstName,
-                            t.Frequency.ToString(CultureInfo.InvariantCulture))))
-                    .Concat(new[] { "" })
-                    .Concat(new[] { "LastName,Frequency" })
-                    .Concat(sortedLastNameFrequencies.Select(t =>
-                        string.Join(
-                            ",",
-                            t.LastName,
+                            t.Name,
                             t.Frequency.ToString(CultureInfo.InvariantCulture)))));
             
             //
@@ -161,15 +143,8 @@ namespace CsvDemo.AddressAnalyserConsole
             File.WriteAllLines(
                 addressReportPath,
                 new string[] {}
-                    .Concat(new[] { "StreetNumber,StreetName,City,State,Postcode" })
-                    .Concat(sortedAddresses.Select(a =>
-                        string.Join(
-                            ",",
-                            a.StreetNumber.ToString(CultureInfo.InvariantCulture),
-                            a.StreetName,
-                            a.City,
-                            a.State,
-                            a.Postcode))));
+                    .Concat(new[] { "Address" })
+                    .Concat(sortedAddresses));
         }
 
     }
