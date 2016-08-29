@@ -1,12 +1,9 @@
-﻿using System;
-
-namespace CsvDemo.AddressAnalyserConsole
+﻿namespace CsvDemo
 {
-
     /// <summary>
     /// A person with address and phone number contact information
     /// </summary>
-    class Person
+    public class Person
     {
 
         public Person()

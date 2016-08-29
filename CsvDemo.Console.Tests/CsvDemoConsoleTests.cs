@@ -3,10 +3,10 @@ using System.Reflection;
 using System.IO;
 using System.Diagnostics;
 
-namespace CsvDemo.AddressAnalyserConsole.Tests
+namespace CsvDemo.Console.Tests
 {
     [TestClass]
-    public class AddressAnalyserConsoleTests
+    public class CsvDemoConsoleTests
     {
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace CsvDemo.AddressAnalyserConsole.Tests
         static readonly string exePath =
             Path.Combine(
                 Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                "AddressAnalyserConsole.exe");
+                "CsvDemo.Console.exe");
 
 
         /// <summary>
