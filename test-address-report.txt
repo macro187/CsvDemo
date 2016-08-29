@@ -1,7 +1,9 @@
-StreetNumber,StreetName,City,State,Postcode
-1,Apple Ave,Fruitvale,QLD,4200
-4,Apple Ave,Fruitvale,QLD,4200
-2,Banana Blvd,Fruitvale,QLD,4200
-5,Banana Blvd,Fruitvale,QLD,4200
-3,Cantaloupe Cres,Fruitvale,QLD,4200
-6,Cantaloupe Cres,Fruitvale,QLD,4200
+Address
+65 Ambling Way
+8 Crimson Rd
+12 Howard St
+102 Long Lane
+94 Roland St
+78 Short Lane
+82 Stewart St
+49 Sutherland St

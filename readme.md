@@ -121,16 +121,16 @@ Tasks
         REQ-06
 
 
-    []  Use new test CSV data
+    [x]  Use new test CSV data
 
 
-    []  Produce hand-written REQ-04 output file for the new example CSV
+    [x]  Produce hand-written REQ-04 output file for the new example CSV
 
 
-    []  Produce hand-written REQ-05 output file for the new example CSV
+    [x]  Produce hand-written REQ-05 output file for the new example CSV
 
 
-    []  Adjust model to match new CSV data
+    []  Adjust code to process new CSV data
 
 
     []  Use a CSV reader from NuGet to eliminate CSV reading/writing limitations
