@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsvDemo.Analysers", "CsvDem
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsvDemo.Reporting", "CsvDemo.Reporting\CsvDemo.Reporting.csproj", "{1E0ADE7D-9561-4D5C-AF9C-F3E4F2CAFF0C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsvDemo.Analysers.Tests", "CsvDemo.Analysers.Tests\CsvDemo.Analysers.Tests.csproj", "{FFA5C5FF-8FCA-4D21-8755-7AE3E6713F9C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,10 @@ Global
 		{1E0ADE7D-9561-4D5C-AF9C-F3E4F2CAFF0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E0ADE7D-9561-4D5C-AF9C-F3E4F2CAFF0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E0ADE7D-9561-4D5C-AF9C-F3E4F2CAFF0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFA5C5FF-8FCA-4D21-8755-7AE3E6713F9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFA5C5FF-8FCA-4D21-8755-7AE3E6713F9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFA5C5FF-8FCA-4D21-8755-7AE3E6713F9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFA5C5FF-8FCA-4D21-8755-7AE3E6713F9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
