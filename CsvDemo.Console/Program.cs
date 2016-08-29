@@ -40,13 +40,23 @@ namespace CsvDemo.Console
                 "address-report.txt");
 
 
+        /// <summary>
+        /// Program entry point
+        /// </summary>
+        /// <remarks>
+        /// Invokes program logic in <see cref="Main2()"/>, routing trace/debug output to stderr, handling exceptions,
+        /// and returning an appropriate process exit code depending on success or failure.
+        /// </remarks>
+        /// <returns>
+        /// Exit code 0 on success
+        /// - OR -
+        /// Non-zero exit code on failure
+        /// </returns>
         static int Main()
         {
-            // Route trace and debug output to stderr
             Trace.Listeners.Clear();
             Trace.Listeners.Add(new ConsoleTraceListener(true));
 
-            // Run the rest of the program, handling exceptions and returning appropriate process exit codes
             try
             {
                 Main2();
@@ -62,9 +72,12 @@ namespace CsvDemo.Console
         }
 
 
+        /// <summary>
+        /// Program logic
+        /// </summary>
         static void Main2()
         {
-            // Use a people analyser to collection information about people in the input CSV file
+            // Use a people analyser to collect information about people from the input CSV file
             var analyser = new PeopleAnalyser();
             using (var textReader = File.OpenText(csvPath))
             {
@@ -74,7 +87,8 @@ namespace CsvDemo.Console
                 }
             }
 
-            // Use report generators to produce output report file(s) from information collected by the people analyser
+            // Use report generator(s) to produce output report file(s) from information collected by the people
+            // analyser
             using (var textWriter = new StreamWriter(frequencyReportPath))
             {
                 NameFrequencyReporter.GenerateReport(analyser.NameTallies, textWriter);
