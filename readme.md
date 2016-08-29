@@ -21,37 +21,71 @@ most comfortable with.
 Requirements
 ============
 
-    REQ-01  A program
+`REQ-01`    A program
 
-    REQ-02  Written in C#
+`REQ-02`    Written in C#
 
-    REQ-03  Reads a CSV file
+`REQ-03`    Reads a CSV file
 
-    REQ-04  Outputs a text file containing frequency of the first and last names ordered by
+`REQ-04`    Outputs a text file containing frequency of the first and last names ordered by
             frequency and then alphabetically
 
-    REQ-05  Outputs a text file containing addresses sorted alphabetically by street name
+`REQ-05`    Outputs a text file containing addresses sorted alphabetically by street name
 
-    REQ-06  Includes a unit test project
+`REQ-06`    Includes a unit test project
 
-    REQ-07  Design consisting of multiple components, each reflecting a logical part of the overall
+`REQ-07`    Design consisting of multiple components, each reflecting a logical part of the overall
             problem
 
-    REQ-08  Unit test suite for each component
+`REQ-08`    Unit test suite for each component
 
 
 
 Assumptions
 ===========
 
-    -   REQ-05 after street name, also sort by street number to break ties and ensure order
-        stability
+-   `REQ-05` after street name, also sort by street number to break ties and ensure order
+    stability
 
-    -   All text operations are case-sensitive
+-   All text operations are case-sensitive
 
-    -   Input CSV file is UTF8 w/ native line-endings
+-   Input CSV file is UTF8 w/ native line-endings
 
-    -   Output CSV files are UTF8 w/ native line-endings
+-   Output CSV files are UTF8 w/ native line-endings
+
+
+
+Design
+======
+
+The overall problem **decomposes** into the following constituent sub-problems:
+
+1.  Representing the elements of the problem space in the software
+
+2.  Reading CSV data
+
+3.  Analysing the data to extract aggregate information
+
+4.  Producing various reports from that aggregate information
+
+5.  Reading input files, writing output files, and other basic administrative tasks
+
+
+The above logical sub-problems map to different **components** of the solution as follows:
+
+1.  The domain model type(s) in `CsvDemo`
+
+2.  An off-the-shelf CSV reader/writer library
+
+3.  The `PeopleAnalyser` class in `CsvDemo.Analysers`
+
+4.  The reporter classes in `CsvDemo.Reporting`
+
+5.  The console application in `CsvDemo.Reporting`
+
+
+Each component (with the exception of the off-the-shelf CSV library) has a corresponding **unit test
+suite** in a project of the same name suffixed with `.Tests`.
 
 
 
@@ -130,8 +164,14 @@ Tasks
 
     [x] Factor monolithic console program out into modules as per REQ-07
 
+        Delivers:
+        REQ-07
+
 
     [x] Produce unit test suites for each module as per REQ-08
+
+        Delivers:
+        REQ-08
 
 
     []  Improve documentation comments / readme
