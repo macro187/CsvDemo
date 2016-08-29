@@ -5,6 +5,13 @@ using System.Text.RegularExpressions;
 namespace CsvDemo
 {
 
+    /// <summary>
+    /// A person's address
+    /// </summary>
+    /// <remarks>
+    /// This type is designed to represent the entire address as a single string, reflecting the example CSV format, but
+    /// also to have additional properties that provide access to individual address components where available.
+    /// </remarks>
     public class Address
         : IEquatable<Address>
     {
