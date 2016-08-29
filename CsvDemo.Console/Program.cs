@@ -52,7 +52,6 @@ namespace CsvDemo.Console
         /// </returns>
         static int Main()
         {
-            Trace.Listeners.Clear();
             Trace.Listeners.Add(new ConsoleTraceListener(true));
 
             try
