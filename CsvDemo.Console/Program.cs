@@ -12,7 +12,7 @@ namespace CsvDemo.Console
     {
         
         /// <summary>
-        /// Full path the to the CSV input file
+        /// Full path to the CSV input file
         /// </summary>
         static string csvPath =
             Path.Combine(
@@ -21,7 +21,7 @@ namespace CsvDemo.Console
 
 
         /// <summary>
-        /// Full path the to frequency report output file
+        /// Full path to the frequency report output file
         /// </summary>
         static string frequencyReportPath =
             Path.Combine(
@@ -30,7 +30,7 @@ namespace CsvDemo.Console
 
 
         /// <summary>
-        /// Full path the to address report output file
+        /// Full path to the address report output file
         /// </summary>
         static string addressReportPath =
             Path.Combine(
@@ -75,7 +75,8 @@ namespace CsvDemo.Console
         /// </summary>
         static void Main2()
         {
-            // Use a people analyser to collect information about people from the input CSV file
+            // Use a CSV reader to read records about people from the CSV file, and a people analyser to collect
+            // aggregate information about them
             var analyser = new PeopleAnalyser();
             using (var textReader = File.OpenText(csvPath))
             {

@@ -26,6 +26,11 @@ namespace CsvDemo.Reporting
         /// <param name="destination">
         /// The <see cref="TextWriter"/> to write the report to
         /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="addresses"/> was <c>null</c>
+        /// - OR -
+        /// <paramref name="destination"/> was <c>null</c>
+        /// </exception>
         public static void GenerateReport(IEnumerable<string> addresses, TextWriter destination)
         {
             if (addresses == null) throw new ArgumentNullException("addresses");
