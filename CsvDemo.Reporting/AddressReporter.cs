@@ -31,21 +31,16 @@ namespace CsvDemo.Reporting
         /// - OR -
         /// <paramref name="destination"/> was <c>null</c>
         /// </exception>
-        public static void GenerateReport(IEnumerable<string> addresses, TextWriter destination)
+        public static void GenerateReport(IEnumerable<Address> addresses, TextWriter destination)
         {
             if (addresses == null) throw new ArgumentNullException("addresses");
             if (destination == null) throw new ArgumentNullException("destination");
 
             var sortedAddresses =
                 addresses
-                    .Select(address => address.Split(new char[] { ' ' }, 2))
-                    .Select(a => new {
-                        Number = int.Parse(a[0], CultureInfo.InvariantCulture),
-                        Street = a[1] })
-                    .OrderBy(a => a.Street)
-                    .ThenBy(a => a.Number)
-                    .Select(a => new {
-                        Address = a.Number.ToString(CultureInfo.InvariantCulture) + " " + a.Street });
+                    .OrderBy(a => a.StreetName)
+                    .ThenBy(a => a.StreetNumber)
+                    .Select(a => new { Address = a.ToString() });
 
             new CsvWriter(destination).WriteRecords(sortedAddresses);
         }

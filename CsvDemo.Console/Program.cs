@@ -5,6 +5,7 @@ using System.IO;
 using System.Reflection;
 using CsvDemo.Analysers;
 using CsvDemo.Reporting;
+using CsvHelper.Configuration;
 
 namespace CsvDemo.Console
 {
@@ -79,7 +80,9 @@ namespace CsvDemo.Console
             var analyser = new PeopleAnalyser();
             using (var textReader = File.OpenText(csvPath))
             {
-                foreach (var person in new CsvReader(textReader).GetRecords<Person>())
+                var csvReader = new CsvReader(textReader);
+                csvReader.Configuration.RegisterClassMap<PersonCsvMap>();
+                foreach (var person in csvReader.GetRecords<Person>())
                 {
                     analyser.Process(person);
                 }
@@ -94,6 +97,19 @@ namespace CsvDemo.Console
             using (var textWriter = new StreamWriter(addressReportPath))
             {
                 AddressReporter.GenerateReport(analyser.UniqueAddresses, textWriter);
+            }
+        }
+
+
+        public sealed class PersonCsvMap
+            : CsvClassMap<Person>
+        {
+            public PersonCsvMap()
+            {
+                Map (p => p.FirstName);
+                Map (p => p.LastName);
+                Map (p => p.Address).ConvertUsing(row => new Address(row.GetField("Address")));
+                Map (p => p.PhoneNumber);
             }
         }
 

@@ -59,6 +59,10 @@
       <Project>{1e0ade7d-9561-4d5c-af9c-f3e4f2caff0c}</Project>
       <Name>CsvDemo.Reporting</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CsvDemo\CsvDemo.csproj">
+      <Project>{93e77642-db0f-4511-aa14-18d731faaf38}</Project>
+      <Name>CsvDemo</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

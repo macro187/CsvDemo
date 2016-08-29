@@ -20,7 +20,7 @@ namespace CsvDemo.Tests
             var person = new Person();
             Assert.AreEqual("", person.FirstName);
             Assert.AreEqual("", person.LastName);
-            Assert.AreEqual("", person.Address);
+            Assert.AreEqual("", person.Address.ToString());
             Assert.AreEqual("", person.PhoneNumber);
         }
 

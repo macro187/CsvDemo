@@ -61,13 +61,19 @@ namespace CsvDemo.Analysers.Tests
             var analyser = new PeopleAnalyser();
 
             analyser.Process(new Person() { Address = "a" });
-            Assert.IsTrue(analyser.UniqueAddresses.OrderBy(a => a).SequenceEqual(new[] { "a" }));
+            Assert.IsTrue(
+                analyser.UniqueAddresses.AsEnumerable().OrderBy(a => a.ToString())
+                .SequenceEqual(new Address[] { "a" }));
 
             analyser.Process(new Person() { Address = "a" });
-            Assert.IsTrue(analyser.UniqueAddresses.OrderBy(a => a).SequenceEqual(new[] { "a" }));
+            Assert.IsTrue(
+                analyser.UniqueAddresses.AsEnumerable().OrderBy(a => a.ToString())
+                .SequenceEqual(new Address[] { "a" }));
 
             analyser.Process(new Person() { Address = "b" });
-            Assert.IsTrue(analyser.UniqueAddresses.OrderBy(a => a).SequenceEqual(new[] { "a", "b" }));
+            Assert.IsTrue(
+                analyser.UniqueAddresses.AsEnumerable().OrderBy(a => a.ToString())
+                .SequenceEqual(new Address[] { "a", "b" }));
         }
 
     }

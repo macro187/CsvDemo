@@ -20,7 +20,7 @@ namespace CsvDemo.Reporting.Tests
         [ExpectedException(typeof(ArgumentNullException))]
         public void GenerateReport_Null_Destination_Throws_ArgumentNullException()
         {
-            AddressReporter.GenerateReport(new string[0], null);
+            AddressReporter.GenerateReport(new Address[0], null);
         }
 
 
@@ -28,7 +28,7 @@ namespace CsvDemo.Reporting.Tests
         public void GenerateReport_Generates_Correct_Report()
         {
             var addresses =
-                new[] {
+                new Address[] {
                     "1 Cantaloupe Cres",
                     "3 Banana Blvd",
                     "2 Banana Blvd",

@@ -59,7 +59,7 @@ namespace CsvDemo
         /// <summary>
         /// The person's street address
         /// </summary>
-        public string Address
+        public Address Address
         {
             get
             {
@@ -71,7 +71,7 @@ namespace CsvDemo
                 address = value;
             }
         }
-        string address;
+        Address address;
 
 
         /// <summary>

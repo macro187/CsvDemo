@@ -21,7 +21,7 @@ namespace CsvDemo.Analysers
         public PeopleAnalyser()
         {
             nameTallies = new Dictionary<string, int>();
-            uniqueAddresses = new HashSet<string>();
+            uniqueAddresses = new HashSet<Address>();
         }
 
 
@@ -41,11 +41,11 @@ namespace CsvDemo.Analysers
         /// <summary>
         /// A running list of all unique addresses encountered
         /// </summary>
-        public IReadOnlyCollection<string> UniqueAddresses
+        public IReadOnlyCollection<Address> UniqueAddresses
         {
             get
             {
-                return new ReadOnlyCollection<string>(new List<string>(uniqueAddresses));
+                return new ReadOnlyCollection<Address>(new List<Address>(uniqueAddresses));
             }
         }
 
@@ -77,7 +77,7 @@ namespace CsvDemo.Analysers
         IDictionary<string, int> nameTallies;
 
 
-        ISet<string> uniqueAddresses;
+        ISet<Address> uniqueAddresses;
 
     }
 }
