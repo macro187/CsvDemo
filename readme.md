@@ -44,18 +44,10 @@ Requirements
 Assumptions
 ===========
 
-    -   REQ-05 after StreetName, also sort by additional fields to break ties and ensure order
-        stability: StreetNumber, City, State, PostCode
+    -   REQ-05 after street name, also sort by street number to break ties and ensure order
+        stability
 
-    -   CSV header present
-
-    -   CSV fields are in a known order
-
-    -   No invalid/unexpected/missing CSV data
-
-    -   No CSV data that differs by case only
-
-    -   No CSV data containing comma, quote, or newline characters
+    -   All text operations are case-sensitive
 
     -   Input CSV file is UTF8 w/ native line-endings
 
@@ -133,7 +125,7 @@ Tasks
     [x] Adjust code to process new CSV data
 
 
-    []  Use a CSV reader from NuGet to eliminate CSV reading/writing limitations
+    [x] Use a CSV reader from NuGet to eliminate CSV reading/writing limitations
 
 
     []  Factor monolithic console program out into modules as per REQ-07

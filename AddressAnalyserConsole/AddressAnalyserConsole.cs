@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CsvHelper;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -64,45 +65,27 @@ namespace CsvDemo.AddressAnalyserConsole
         }
 
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Maintainability",
-            "CA1502:AvoidExcessiveComplexity",
-            Justification = "It's an MVP, don't worry about it")]
         static void Main2()
         {
             //
-            // Build an enumerable of records
-            //
-            var people =
-                // ...that lazily reads lines from the CSV file
-                File.ReadLines(csvPath)
-                    // ...skipping the header
-                    .Skip(1)
-                    // ...splits apart the individual fields
-                    .Select(line => line.Split(','))
-                    // ...and packs them up as record objects based on a known field order
-                    .Select(fields =>
-                        new Person() {
-                            FirstName = fields[0],
-                            LastName = fields[1],
-                            Address = fields[2],
-                            PhoneNumber = fields[3]});
-
-            //
-            // Process records, maintaining cumulative information required for reports
+            // Process records from CSV file, maintaining cumulative information required for
+            // reports
             //
             var nameTallies = new Dictionary<string, int>();
             var uniqueAddresses = new HashSet<string>();
-            foreach (var p in people)
+            using (var textReader = File.OpenText(csvPath))
             {
-                // ...names and their frequencies
-                if (!nameTallies.ContainsKey(p.FirstName)) nameTallies.Add(p.FirstName, 0);
-                nameTallies[p.FirstName]++;
-                if (!nameTallies.ContainsKey(p.LastName)) nameTallies.Add(p.LastName, 0);
-                nameTallies[p.LastName]++;
+                foreach (var p in new CsvReader(textReader).GetRecords<Person>())
+                {
+                    // Track names and their frequencies
+                    if (!nameTallies.ContainsKey(p.FirstName)) nameTallies.Add(p.FirstName, 0);
+                    nameTallies[p.FirstName]++;
+                    if (!nameTallies.ContainsKey(p.LastName)) nameTallies.Add(p.LastName, 0);
+                    nameTallies[p.LastName]++;
 
-                // ...unique addresses
-                uniqueAddresses.Add(p.Address);
+                    // Track unique addresses
+                    uniqueAddresses.Add(p.Address);
+                }
             }
 
             //
@@ -122,29 +105,21 @@ namespace CsvDemo.AddressAnalyserConsole
                         Street = a[1] })
                     .OrderBy(a => a.Street)
                     .ThenBy(a => a.Number)
-                    .Select(a => a.Number.ToString(CultureInfo.InvariantCulture) + " " + a.Street);
+                    .Select(a => new {
+                        Address = a.Number.ToString(CultureInfo.InvariantCulture) + " " + a.Street });
 
             //
-            // Produce frequency report
+            // Produce reports
             //
-            File.WriteAllLines(
-                frequencyReportPath,
-                new string[] {}
-                    .Concat(new[] { "Name,Frequency" })
-                    .Concat(sortedNameFrequencies.Select(t =>
-                        string.Join(
-                            ",",
-                            t.Name,
-                            t.Frequency.ToString(CultureInfo.InvariantCulture)))));
+            using (var textWriter = new StreamWriter(frequencyReportPath))
+            {
+                new CsvWriter(textWriter).WriteRecords(sortedNameFrequencies);
+            }
             
-            //
-            // Produce address report
-            //
-            File.WriteAllLines(
-                addressReportPath,
-                new string[] {}
-                    .Concat(new[] { "Address" })
-                    .Concat(sortedAddresses));
+            using (var textWriter = new StreamWriter(addressReportPath))
+            {
+                new CsvWriter(textWriter).WriteRecords(sortedAddresses);
+            }
         }
 
     }
