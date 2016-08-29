@@ -128,11 +128,13 @@ Tasks
     [x] Use a CSV reader from NuGet to eliminate CSV reading/writing limitations
 
 
-    []  Factor monolithic console program out into modules as per REQ-07
+    [x] Factor monolithic console program out into modules as per REQ-07
 
 
-    []  Produce unit test suites for each module as per REQ-08
+    [x] Produce unit test suites for each module as per REQ-08
 
 
     []  Improve documentation comments / readme
 
+
+    []  Other improvements?
