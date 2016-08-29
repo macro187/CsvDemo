@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using CsvDemo.Analysers;
+using CsvDemo.Reporting;
 
 namespace CsvDemo.Console
 {
@@ -41,15 +42,11 @@ namespace CsvDemo.Console
 
         static int Main()
         {
-            //
-            // Route trace/debug output to stderr
-            //
+            // Route trace and debug output to stderr
             Trace.Listeners.Clear();
             Trace.Listeners.Add(new ConsoleTraceListener(true));
 
-            //
-            // Handle exceptions and return appropriate process exit codes
-            //
+            // Run the rest of the program, handling exceptions and returning appropriate process exit codes
             try
             {
                 Main2();
@@ -67,9 +64,7 @@ namespace CsvDemo.Console
 
         static void Main2()
         {
-            //
-            // Analyse records from CSV file using a PeopleAnalyser
-            //
+            // Use a people analyser to collection information about people in the input CSV file
             var analyser = new PeopleAnalyser();
             using (var textReader = File.OpenText(csvPath))
             {
@@ -79,37 +74,14 @@ namespace CsvDemo.Console
                 }
             }
 
-            //
-            // Compute summary information for reports
-            //
-            var sortedNameFrequencies =
-                analyser.NameTallies
-                    .Select(kvp => new { Name = kvp.Key, Frequency = kvp.Value })
-                    .OrderByDescending(tally => tally.Frequency)
-                    .ThenBy(tally => tally.Name);
-
-            var sortedAddresses =
-                analyser.UniqueAddresses
-                    .Select(address => address.Split(new char[] { ' ' }, 2))
-                    .Select(a => new {
-                        Number = int.Parse(a[0], CultureInfo.InvariantCulture),
-                        Street = a[1] })
-                    .OrderBy(a => a.Street)
-                    .ThenBy(a => a.Number)
-                    .Select(a => new {
-                        Address = a.Number.ToString(CultureInfo.InvariantCulture) + " " + a.Street });
-
-            //
-            // Produce reports
-            //
+            // Use report generators to produce output report file(s) from information collected by the people analyser
             using (var textWriter = new StreamWriter(frequencyReportPath))
             {
-                new CsvWriter(textWriter).WriteRecords(sortedNameFrequencies);
+                NameFrequencyReporter.GenerateReport(analyser.NameTallies, textWriter);
             }
-            
             using (var textWriter = new StreamWriter(addressReportPath))
             {
-                new CsvWriter(textWriter).WriteRecords(sortedAddresses);
+                AddressReporter.GenerateReport(analyser.UniqueAddresses, textWriter);
             }
         }
 

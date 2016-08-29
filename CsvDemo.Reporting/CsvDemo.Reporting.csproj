@@ -1,20 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AC58EE0E-EDD0-4605-9F23-E1674F8350CA}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{1E0ADE7D-9561-4D5C-AF9C-F3E4F2CAFF0C}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CsvDemo.Console</RootNamespace>
-    <AssemblyName>CsvDemo.Console</AssemblyName>
+    <RootNamespace>CsvDemo.Reporting</RootNamespace>
+    <AssemblyName>CsvDemo.Reporting</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,13 +20,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <UseVSHostingProcess>false</UseVSHostingProcess>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -51,31 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="AddressReporter.cs" />
+    <Compile Include="NameFrequencyReporter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\test-data.csv">
-      <Link>test-data.csv</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CsvDemo.Analysers\CsvDemo.Analysers.csproj">
-      <Project>{10600833-68e9-46f2-bcdc-2e7eac52a975}</Project>
-      <Name>CsvDemo.Analysers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CsvDemo.Reporting\CsvDemo.Reporting.csproj">
-      <Project>{1e0ade7d-9561-4d5c-af9c-f3e4f2caff0c}</Project>
-      <Name>CsvDemo.Reporting</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CsvDemo\CsvDemo.csproj">
-      <Project>{93e77642-db0f-4511-aa14-18d731faaf38}</Project>
-      <Name>CsvDemo</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
