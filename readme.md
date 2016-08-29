@@ -34,6 +34,11 @@ Requirements
 
     REQ-06  Includes a unit test project
 
+    REQ-07  Design consisting of multiple components, each reflecting a logical part of the overall
+            problem
+
+    REQ-08  Unit test suite for each component
+
 
 
 Assumptions
@@ -114,4 +119,28 @@ Tasks
 
         Delivers:
         REQ-06
+
+
+    []  Use new test CSV data
+
+
+    []  Produce hand-written REQ-04 output file for the new example CSV
+
+
+    []  Produce hand-written REQ-05 output file for the new example CSV
+
+
+    []  Adjust model to match new CSV data
+
+
+    []  Use a CSV reader from NuGet to eliminate CSV reading/writing limitations
+
+
+    []  Factor monolithic console program out into modules as per REQ-07
+
+
+    []  Produce unit test suites for each module as per REQ-08
+
+
+    []  Improve documentation comments / readme
 
