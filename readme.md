@@ -174,7 +174,7 @@ Tasks
         REQ-08
 
 
-    []  Improve documentation comments / readme
+    [x] Improve documentation comments / readme
 
 
-    []  Other improvements?
+    [x] Strong Address domain type
